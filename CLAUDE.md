@@ -18,7 +18,7 @@ Un solo módulo `:app`, organizado **primero por capa y luego por juego**. Detal
 
 ```
 com/antonio/minigames/
-├── core/                 # mvi base, ui/theme, navigation
+├── core/                 # ui/theme, navigation
 ├── data/memory/
 ├── domain/memory/
 ├── presentation/

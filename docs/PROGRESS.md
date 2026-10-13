@@ -1,11 +1,11 @@
 # Progreso
 
-**Paso actual:** MG-3 — paso 2, base MVI (en revisión). Siguiente: MG-4, paso 3 (tema provisional + navegación + menú).
+**Paso actual:** MG-3 — paso 2, reglas MVI (en revisión). Siguiente: MG-4, paso 3 (tema provisional + navegación + menú).
 
 ## Roadmap
 - [x] **0. Base de conocimiento**: git, `CLAUDE.md`, `PROGRESS.md`, reglas de arquitectura y git
 - [x] **1. Esqueleto Android** (MG-1, MG-2): Gradle + version catalog, Compose, Hilt, Navigation, KSP; la app vacía compila
-- [x] **2. Base MVI** (MG-3): `core/mvi` (State / Intent / Effect + ViewModel base) + `rules/mvi.md`
+- [x] **2. Reglas MVI** (MG-3): `rules/mvi.md`; cada pantalla tiene su propio Contract y ViewModel, sin clase base
 - [ ] **3. Tema provisional + navegación**: `core/ui/theme`, NavHost type-safe, pantalla de menú
 - [ ] **4. Dominio Memory**: modelos + casos de uso + tests + `rules/testing.md`
 - [ ] **5. Datos Memory**: `MemoryThemeRepository` con tema genérico (emojis/animales) + módulo Hilt
@@ -34,6 +34,7 @@
 - 2026-10-13: git flow con `develop`; ramas `feature/MG-<n>-...`, commits `[MG-<n>]: <verbo> ...` en inglés.
 - 2026-10-13: las librerías se fijan a versiones compatibles con AGP 8.8 y SDK 35 (core-ktx 1.15.0, activity-compose 1.10.1, lifecycle 2.8.7) porque la plantilla de Android Studio no compilaba.
 
+- 2026-10-13: sin ViewModel base ni `core/mvi`; cada pantalla tiene su propio Contract y ViewModel (decisión del usuario en MG-3).
 - 2026-10-13: versiones de MG-2, compatibles con Android Studio Ladybug: Kotlin 2.0.21, KSP 2.0.21-1.0.28, Hilt 2.55, Navigation 2.8.5, Compose BOM 2024.12.01.
 
 ## Pendiente / dudas

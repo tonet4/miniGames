@@ -9,7 +9,6 @@ com.antonio.minigames
 ├── MiniGamesApp.kt           # @HiltAndroidApp
 ├── MainActivity.kt           # @AndroidEntryPoint, aloja el NavHost
 ├── core/
-│   ├── mvi/                  # contrato MVI y ViewModel base (compartido)
 │   ├── navigation/           # rutas @Serializable y NavHost
 │   └── ui/theme/             # colores, tipografía, formas
 ├── data/
@@ -49,7 +48,7 @@ presentation ──► domain ◄── data
 - `domain` define las interfaces de repositorio y `data` las implementa.
 - `presentation` solo habla con `domain` (casos de uso o repositorios), nunca con `data`.
 - `di` es lo único que conoce las implementaciones de `data` y las enlaza (`@Binds`).
-- Un juego **no** importa nada de otro juego. Lo que se comparte va a `core/`.
+- Un juego **no** importa nada de otro juego. Lo que se comparte (tema visual, navegación) va a `core/`. No hay ViewModel base: ver [`mvi.md`](mvi.md).
 
 ## Temas de juego
 Las imágenes y textos de cada tema (genérico, dibujos…) salen de `data`. La lógica del juego no sabe de qué dibujos son las cartas.
