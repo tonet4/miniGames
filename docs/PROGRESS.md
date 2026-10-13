@@ -1,11 +1,11 @@
 # Progreso
 
-**Paso actual:** MG-2 — paso 1, esqueleto Android con Hilt + Navigation + KSP (en revisión). Siguiente: MG-3, paso 2 (base MVI).
+**Paso actual:** MG-3 — paso 2, base MVI (en revisión). Siguiente: MG-4, paso 3 (tema provisional + navegación + menú).
 
 ## Roadmap
 - [x] **0. Base de conocimiento**: git, `CLAUDE.md`, `PROGRESS.md`, reglas de arquitectura y git
 - [x] **1. Esqueleto Android** (MG-1, MG-2): Gradle + version catalog, Compose, Hilt, Navigation, KSP; la app vacía compila
-- [ ] **2. Base MVI**: `core/mvi` (State / Intent / Effect + ViewModel base) + `rules/mvi.md`
+- [x] **2. Base MVI** (MG-3): `core/mvi` (State / Intent / Effect + ViewModel base) + `rules/mvi.md`
 - [ ] **3. Tema provisional + navegación**: `core/ui/theme`, NavHost type-safe, pantalla de menú
 - [ ] **4. Dominio Memory**: modelos + casos de uso + tests + `rules/testing.md`
 - [ ] **5. Datos Memory**: `MemoryThemeRepository` con tema genérico (emojis/animales) + módulo Hilt
