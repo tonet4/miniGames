@@ -38,5 +38,5 @@ Las reglas crecen paso a paso: cuando se toma una decisión nueva, se añade o a
 ## Forma de trabajar
 - **Pasos pequeños**: un paso del roadmap = una rama = un PR. Nunca más de uno a la vez.
 - Al terminar un paso: resumen con árbol de archivos y snippets, actualizar `docs/PROGRESS.md` y **esperar la revisión** antes de seguir.
-- Código, nombres y comentarios en **inglés**. Docs y commits en **español**.
+- Código, nombres, comentarios, ramas y commits en **inglés** (`feature/MG-<n>-...`, `[MG-<n>]: ...`). Docs en **español**.
 - Contenido con personajes de dibujos: solo uso personal. Los temas tienen que poder cambiarse sin tocar la lógica del juego.

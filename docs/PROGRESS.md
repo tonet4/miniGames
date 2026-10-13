@@ -1,9 +1,9 @@
 # Progreso
 
-**Paso actual:** 0 — Base de conocimiento (en revisión)
+**Paso actual:** MG-1 — commit inicial del proyecto (en revisión). Siguiente: paso 1 (Hilt, Navigation, KSP).
 
 ## Roadmap
-- [ ] **0. Base de conocimiento**: git, `CLAUDE.md`, `PROGRESS.md`, reglas de arquitectura y git
+- [x] **0. Base de conocimiento**: git, `CLAUDE.md`, `PROGRESS.md`, reglas de arquitectura y git
 - [ ] **1. Esqueleto Android**: Gradle + version catalog, Compose, Hilt, Navigation, KSP; la app vacía compila
 - [ ] **2. Base MVI**: `core/mvi` (State / Intent / Effect + ViewModel base) + `rules/mvi.md`
 - [ ] **3. Tema provisional + navegación**: `core/ui/theme`, NavHost type-safe, pantalla de menú
@@ -21,9 +21,9 @@
 |-------------|--------|
 | Git | ✅ 2.44 |
 | JDK | ✅ 22 (AGP necesita 17+) |
-| Android Studio + SDK | ✅ instalado (`%LOCALAPPDATA%\Android\Sdk`) |
-| `gh` CLI | ❌ no instalado (hace falta para crear PRs desde Claude) |
-| Repo GitHub | ❓ pendiente |
+| Android Studio + SDK | ⚠️ Ladybug 2024.2 → máximo AGP 8.8 y SDK 35 (`%LOCALAPPDATA%\Android\Sdk`) |
+| `gh` CLI | ❌ no instalado (los PRs se abren desde la web) |
+| Repo GitHub | ✅ https://github.com/tonet4/miniGames (ramas `main` y `develop`) |
 | Stitch | ❌ sin cuenta / API key (paso 9) |
 
 ## Decisiones
@@ -31,5 +31,9 @@
 - 2026-10-13: el primer Memory usa un tema genérico; el tema de dibujos llega en el paso 11.
 - 2026-10-13: Stitch se conecta cuando el juego ya funcione (paso 9).
 
+- 2026-10-13: git flow con `develop`; ramas `feature/MG-<n>-...`, commits `[MG-<n>]: <verbo> ...` en inglés.
+- 2026-10-13: las librerías se fijan a versiones compatibles con AGP 8.8 y SDK 35 (core-ktx 1.15.0, activity-compose 1.10.1, lifecycle 2.8.7) porque la plantilla de Android Studio no compilaba.
+
 ## Pendiente / dudas
-- Instalar `gh` (`winget install GitHub.cli`) y crear el repo en GitHub.
+- Actualizar Android Studio para poder usar AGP 8.9+ y SDK 36 (opcional).
+- Instalar `gh` (`winget install GitHub.cli`) para abrir PRs desde Claude (opcional).
