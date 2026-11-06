@@ -33,7 +33,7 @@ domain/memory/model/Card.kt
 domain/memory/MemoryThemeRepository.kt
 domain/memory/usecase/CreateBoardUseCase.kt
 domain/colors/usecase/...
-presentation/navigation/Destinations.kt  ← MemoryDestination, ColorsDestination
+presentation/navigation/Destinations.kt  ← rutas MemoryScreen, ColorsScreen
 presentation/memory/MemoryContract.kt
 presentation/memory/MemoryViewModel.kt
 presentation/memory/MemoryScreen.kt
@@ -62,16 +62,17 @@ Las imágenes y textos de cada tema (genérico, dibujos…) salen de `data`. La 
 | Repositorio (interfaz) | `NounRepository` | `MemoryThemeRepository` |
 | Implementación | `NounRepositoryImpl` | `MemoryThemeRepositoryImpl` |
 | Pantalla | `GameScreen` | `MemoryScreen` |
+| Ruta de navegación | `GameScreen` | `MemoryScreen` |
 | ViewModel | `GameViewModel` | `MemoryViewModel` |
 | Contrato MVI | `GameContract` | `MemoryContract` |
 | Módulo Hilt | `GameModule` | `MemoryModule` |
 
 ## Navegación
 - Todo vive en `presentation/navigation/`:
-  - `Destinations.kt`: un `@Serializable data object` (o `data class` si lleva argumentos) por pantalla, con sufijo `Destination`.
+  - `Destinations.kt`: un `@Serializable data object` (o `data class` si lleva argumentos) por pantalla, con el mismo nombre que su composable (`MemoryScreen`).
   - `MiniGamesNavHost.kt`: el único sitio que usa el `NavController`.
-- Las pantallas no conocen el `NavController`: su `Route` recibe lambdas (`onBack`, `onOpenGame`).
+- Las pantallas no conocen el `NavController`: su composable `<Game>Screen` recibe lambdas (`onNavigateBack`, `onOpenGame`).
 - Añadir un juego nuevo al menú supone tres cambios:
   1. Añadir un valor a `MiniGame` (en `domain/menu/model/MiniGame.kt`). `GetGamesUseCase` lo devuelve solo.
   2. Añadir su rama en `MiniGame.toGameItem()` (`presentation/menu/GameItem.kt`): título y emoji.
-  3. Añadir su `Destination`, su `composable<>` y su entrada en `toDestination()`.
+  3. Añadir su ruta en `Destinations.kt`, su `composable<>` y su entrada en `toDestination()`.
