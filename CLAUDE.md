@@ -18,10 +18,14 @@ Un solo módulo `:app`, organizado **primero por capa y luego por juego**. Detal
 
 ```
 com/antonio/minigames/
-├── core/                 # ui/theme, navigation
+├── ui/
+│   └── theme/            # colores, tipografía
 ├── data/memory/
-├── domain/memory/
+├── domain/
+│   ├── menu/             # MiniGame + GetGamesUseCase
+│   └── memory/
 ├── presentation/
+│   ├── navigation/       # rutas @Serializable + NavHost
 │   ├── menu/
 │   └── memory/
 └── di/

@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">minigames</string>
+    <string name="app_name">Mini Juegos</string>
+    <string name="menu_title">¡A jugar!</string>
+    <string name="game_memory">Memory</string>
+    <string name="coming_soon">¡Muy pronto!</string>
+    <string name="back">Volver</string>
 </resources>
