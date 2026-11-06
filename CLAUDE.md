@@ -18,10 +18,14 @@ Un solo módulo `:app`, organizado **primero por capa y luego por juego**. Detal
 
 ```
 com/antonio/minigames/
-├── core/                 # mvi base, ui/theme, navigation
+├── ui/
+│   └── theme/            # colores, tipografía
 ├── data/memory/
-├── domain/memory/
+├── domain/
+│   ├── menu/             # MiniGame + GetGamesUseCase
+│   └── memory/
 ├── presentation/
+│   ├── navigation/       # rutas @Serializable + NavHost
 │   ├── menu/
 │   └── memory/
 └── di/
@@ -33,6 +37,7 @@ com/antonio/minigames/
 | Arquitectura y carpetas | [`docs/rules/architecture.md`](docs/rules/architecture.md) |
 | Git, ramas y commits | [`docs/rules/git.md`](docs/rules/git.md) |
 | Hilt e inyección | [`docs/rules/hilt.md`](docs/rules/hilt.md) |
+| MVI (State / Intent / Effect) | [`docs/rules/mvi.md`](docs/rules/mvi.md) |
 
 Las reglas crecen paso a paso: cuando se toma una decisión nueva, se añade o ajusta aquí en el mismo PR.
 

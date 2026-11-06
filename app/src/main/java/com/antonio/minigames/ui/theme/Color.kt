@@ -2,10 +2,12 @@ package com.antonio.minigames.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val Purple80 = Color(0xFFD0BCFF)
-val PurpleGrey80 = Color(0xFFCCC2DC)
-val Pink80 = Color(0xFFEFB8C8)
+val SkyBlue = Color(0xFF4FA3F7)
+val SunYellow = Color(0xFFFFC93C)
+val CandyPink = Color(0xFFFF6B9A)
+val Cream = Color(0xFFFFF8EC)
+val Ink = Color(0xFF2B2D42)
 
-val Purple40 = Color(0xFF6650a4)
-val PurpleGrey40 = Color(0xFF625b71)
-val Pink40 = Color(0xFF7D5260)
+val NightBlue = Color(0xFF1B2440)
+val NightSurface = Color(0xFF26304F)
+val SoftWhite = Color(0xFFF2F4FF)
