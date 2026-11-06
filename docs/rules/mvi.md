@@ -2,11 +2,11 @@
 
 ## Flujo
 ```
- Screen ──Intent──► ViewModel.onIntent()
+ Screen ──Intent──► ViewModel.handle()
    ▲                     │
-   │                     ├─ _state.update { it.copy(...) } ──► state: StateFlow<State>
-   │                     └─ _effects.send(...)             ──► effects: Flow<Effect>
-   └───────── observa state y effects ◄─────────────────────┘
+   │                     ├─ _uiState.update { it.copy(...) } ──► uiState: StateFlow<UiState>
+   │                     └─ _uiEffect.emit(...)              ──► effect: SharedFlow<Effect>
+   └───────── observa uiState y effect ◄──────────────────────┘
 ```
 - **State**: todo lo que la pantalla pinta. Es un `data class` inmutable con valores por defecto.
 - **Intent**: lo que hace el usuario (`CardTapped`, `RestartClicked`…). Es un `sealed interface`.
@@ -20,12 +20,12 @@
 presentation/memory/
 ├── MemoryContract.kt    ← State + Intent + Effect
 ├── MemoryViewModel.kt
-└── MemoryScreen.kt      ← MemoryRoute (con ViewModel) + MemoryScreen (sin ViewModel)
+└── MemoryScreen.kt      ← MemoryScreen (con ViewModel) + MemoryScreenScaffold (privado, sin ViewModel)
 ```
 
 ### Contract
 ```kotlin
-data class MemoryState(
+data class MemoryUiState(
     val cards: List<CardUi> = emptyList(),
     val moves: Int = 0,
     val isFinished: Boolean = false,
@@ -34,11 +34,11 @@ data class MemoryState(
 sealed interface MemoryIntent {
     data class CardTapped(val id: Int) : MemoryIntent
     data object RestartClicked : MemoryIntent
-    data object BackClicked : MemoryIntent
+    data object NavigateBack : MemoryIntent
 }
 
 sealed interface MemoryEffect {
-    data object NavigateBack : MemoryEffect
+    data object OnNavigateBack : MemoryEffect
 }
 ```
 
@@ -49,47 +49,62 @@ class MemoryViewModel @Inject constructor(
     private val createBoard: CreateBoardUseCase,
 ) : ViewModel() {
 
-    private val _state = MutableStateFlow(MemoryState())
-    val state: StateFlow<MemoryState> = _state.asStateFlow()
+    private val _uiState = MutableStateFlow(MemoryUiState())
+    val uiState: StateFlow<MemoryUiState> = _uiState.asStateFlow()
 
-    private val _effects = Channel<MemoryEffect>(Channel.BUFFERED)
-    val effects: Flow<MemoryEffect> = _effects.receiveAsFlow()
+    private val _uiEffect = MutableSharedFlow<MemoryEffect>()
+    val effect = _uiEffect.asSharedFlow()
 
-    fun onIntent(intent: MemoryIntent) {
+    fun handle(intent: MemoryIntent) {
         when (intent) {
             is MemoryIntent.CardTapped -> onCardTapped(intent.id)
-            MemoryIntent.RestartClicked -> _state.update { MemoryState(cards = createBoard()) }
-            MemoryIntent.BackClicked -> viewModelScope.launch { _effects.send(MemoryEffect.NavigateBack) }
+            MemoryIntent.RestartClicked -> _uiState.update { MemoryUiState(cards = createBoard()) }
+            MemoryIntent.NavigateBack -> viewModelScope.launch { _uiEffect.emit(MemoryEffect.OnNavigateBack) }
         }
     }
 }
 ```
+`MutableSharedFlow` sin `replay` **pierde** el efecto si nadie lo está recogiendo en ese momento. La pantalla lo recoge desde que entra en composición, y en los tests hay que suscribirse antes de enviar el Intent.
 
-### Screen: Route + Screen
+### Carga inicial
+Los datos iniciales no se cargan en el `init`: se cargan cuando la UI empieza a recoger el estado. Así crear el ViewModel en un test no dispara nada.
+```kotlin
+private val _uiState = MutableStateFlow(MenuUiState())
+val uiState: StateFlow<MenuUiState> = _uiState
+    .onStart { loadMenu() }
+    .stateIn(viewModelScope, SharingStarted.Lazily, _uiState.value)
+```
+- `Lazily`: carga una sola vez. Con `WhileSubscribed` se recargaría al volver a la pantalla.
+- En los tests hay que recoger el estado antes de comprobarlo: `backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { vm.uiState.collect {} }`.
+
+### Screen: Screen + Scaffold
 ```kotlin
 @Composable
-fun MemoryRoute(onBack: () -> Unit, viewModel: MemoryViewModel = hiltViewModel()) {
-    val state by viewModel.state.collectAsStateWithLifecycle()
+fun MemoryScreen(viewModel: MemoryViewModel = hiltViewModel(), onNavigateBack: () -> Unit) {
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    LaunchedEffect(Unit) {
-        viewModel.effects.collect { effect ->
+    LaunchedEffect(viewModel.effect) {
+        viewModel.effect.collect { effect ->
             when (effect) {
-                MemoryEffect.NavigateBack -> onBack()
+                MemoryEffect.OnNavigateBack -> onNavigateBack()
             }
         }
     }
 
-    MemoryScreen(state = state, onIntent = viewModel::onIntent)
+    MemoryScreenScaffold(uiState = uiState, onIntent = viewModel::handle)
 }
 
 @Composable
-fun MemoryScreen(state: MemoryState, onIntent: (MemoryIntent) -> Unit) { /* solo UI */ }
+private fun MemoryScreenScaffold(uiState: MemoryUiState, onIntent: (MemoryIntent) -> Unit) { /* solo UI */ }
 ```
 
 ## Reglas
-- Una única función pública de entrada: `onIntent(intent)`. La pantalla solo envía Intents.
-- `_state` y `_effects` son privados. Se exponen como `StateFlow` y `Flow` de solo lectura.
-- El State solo se cambia con `_state.update { it.copy(...) }`.
-- `MemoryScreen` **no** conoce el ViewModel: recibe `state` y `onIntent`. Así se puede previsualizar con `@Preview` y testear.
+- Una única función pública de entrada: `handle(intent)`. La pantalla solo envía Intents.
+- `_uiState` y `_uiEffect` son privados. Se exponen como `StateFlow` y `SharedFlow` de solo lectura.
+- El State solo se cambia con `_uiState.update { it.copy(...) }`.
+- `MemoryScreenScaffold` **no** conoce el ViewModel: recibe `uiState` y `onIntent`. La `@Preview` usa el Scaffold, porque `hiltViewModel()` no funciona en previews.
 - La lógica del juego (barajar, comprobar pareja…) va en `domain`, no en el ViewModel. El ViewModel orquesta.
-- La navegación sale como Effect y la Route la convierte en lambda (`onBack`). El ViewModel nunca recibe un `NavController`.
+- La navegación sale como Effect y `MemoryScreen` la convierte en lambda (`onNavigateBack`). El ViewModel nunca recibe un `NavController`.
+
+## Tests
+Cada ViewModel tiene su test en `src/test/.../presentation/<game>/`. Se usa `MainDispatcherRule` (en `src/test/.../testutil/`) para que `viewModelScope` funcione. Ejemplo: `MenuViewModelTest`.
