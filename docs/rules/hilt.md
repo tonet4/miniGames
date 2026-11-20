@@ -8,7 +8,7 @@
 ```kotlin
 @HiltViewModel
 class MemoryViewModel @Inject constructor(
-    private val createBoard: CreateBoardUseCase,
+    private val memoryUseCase: MemoryUseCase,
 ) : ViewModel()
 ```
 En la pantalla se obtienen con `hiltViewModel()` (de `androidx.hilt:hilt-navigation-compose`).

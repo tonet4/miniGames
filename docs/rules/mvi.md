@@ -46,7 +46,7 @@ sealed interface MemoryEffect {
 ```kotlin
 @HiltViewModel
 class MemoryViewModel @Inject constructor(
-    private val createBoard: CreateBoardUseCase,
+    private val memoryUseCase: MemoryUseCase,
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(MemoryUiState())
@@ -58,7 +58,7 @@ class MemoryViewModel @Inject constructor(
     fun handle(intent: MemoryIntent) {
         when (intent) {
             is MemoryIntent.CardTapped -> onCardTapped(intent.id)
-            MemoryIntent.RestartClicked -> _uiState.update { MemoryUiState(cards = createBoard()) }
+            MemoryIntent.RestartClicked -> _uiState.update { MemoryUiState(cards = memoryUseCase.createBoard()) }
             MemoryIntent.NavigateBack -> viewModelScope.launch { _uiEffect.emit(MemoryEffect.OnNavigateBack) }
         }
     }

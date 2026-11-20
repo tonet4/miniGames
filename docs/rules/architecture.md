@@ -14,7 +14,7 @@ com.antonio.minigames
 │   ├── memory/               # repositorios, fuentes de datos y mappers del Memory
 │   └── <game>/
 ├── domain/
-│   ├── menu/                 # model/MiniGame.kt + usecase/GetGamesUseCase.kt
+│   ├── menu/                 # model/MiniGame.kt + usecase/MenuUseCase.kt
 │   ├── memory/               # modelos, interfaces de repositorio y casos de uso del Memory
 │   └── <game>/
 ├── presentation/
@@ -31,7 +31,7 @@ data/memory/MemoryThemeRepositoryImpl.kt
 data/colors/ColorsRepositoryImpl.kt
 domain/memory/model/Card.kt
 domain/memory/MemoryThemeRepository.kt
-domain/memory/usecase/CreateBoardUseCase.kt
+domain/memory/usecase/MemoryUseCase.kt
 domain/colors/usecase/...
 presentation/navigation/Destinations.kt  ← rutas MemoryScreen, ColorsScreen
 presentation/memory/MemoryContract.kt
@@ -58,7 +58,7 @@ Las imágenes y textos de cada tema (genérico, dibujos…) salen de `data`. La 
 ## Nombres
 | Qué | Patrón | Ejemplo |
 |-----|--------|---------|
-| Caso de uso | `VerbNounUseCase` | `CreateBoardUseCase` |
+| Caso de uso | `NounUseCase`, una clase por tema con un método por acción (`verbNoun()`) | `MemoryUseCase.createBoard()`, `PokemonUseCase.getRandomPokemon()` |
 | Repositorio (interfaz) | `NounRepository` | `MemoryThemeRepository` |
 | Implementación | `NounRepositoryImpl` | `MemoryThemeRepositoryImpl` |
 | Pantalla | `GameScreen` | `MemoryScreen` |
@@ -73,6 +73,6 @@ Las imágenes y textos de cada tema (genérico, dibujos…) salen de `data`. La 
   - `MiniGamesNavHost.kt`: el único sitio que usa el `NavController`.
 - Las pantallas no conocen el `NavController`: su composable `<Game>Screen` recibe lambdas (`onNavigateBack`, `onOpenGame`).
 - Añadir un juego nuevo al menú supone tres cambios:
-  1. Añadir un valor a `MiniGame` (en `domain/menu/model/MiniGame.kt`). `GetGamesUseCase` lo devuelve solo.
+  1. Añadir un valor a `MiniGame` (en `domain/menu/model/MiniGame.kt`). `MenuUseCase.getGames()` lo devuelve solo.
   2. Añadir su rama en `MiniGame.toGameItem()` (`presentation/menu/GameItem.kt`): título y emoji.
   3. Añadir su ruta en `Destinations.kt`, su `composable<>` y su entrada en `toDestination()`.

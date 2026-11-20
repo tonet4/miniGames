@@ -2,7 +2,7 @@ package com.antonio.minigames.presentation.menu
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.antonio.minigames.domain.menu.usecase.GetGamesUseCase
+import com.antonio.minigames.domain.menu.usecase.MenuUseCase
 import com.antonio.minigames.presentation.menu.MenuIntent.GameClicked
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -18,7 +18,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MenuViewModel @Inject constructor(
-    private val getGames: GetGamesUseCase,
+    private val menuUseCase: MenuUseCase,
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(MenuUiState())
@@ -42,6 +42,6 @@ class MenuViewModel @Inject constructor(
     }
 
     private fun loadMenu() {
-        _uiState.update { it.copy(games = getGames().map { game -> game.toGameItem() }) }
+        _uiState.update { it.copy(games = menuUseCase.getGames().map { game -> game.toGameItem() }) }
     }
 }

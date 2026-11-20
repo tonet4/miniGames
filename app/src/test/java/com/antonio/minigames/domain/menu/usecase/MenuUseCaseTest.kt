@@ -4,10 +4,10 @@ import com.antonio.minigames.domain.menu.model.MiniGame
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
-class GetGamesUseCaseTest {
+class MenuUseCaseTest {
 
     @Test
     fun `returns every mini game`() {
-        assertEquals(MiniGame.entries, GetGamesUseCase()())
+        assertEquals(MiniGame.entries, MenuUseCase().getGames())
     }
 }

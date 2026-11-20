@@ -1,7 +1,7 @@
 package com.antonio.minigames.presentation.menu
 
 import com.antonio.minigames.domain.menu.model.MiniGame
-import com.antonio.minigames.domain.menu.usecase.GetGamesUseCase
+import com.antonio.minigames.domain.menu.usecase.MenuUseCase
 import com.antonio.minigames.testutil.MainDispatcherRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.async
@@ -19,7 +19,7 @@ class MenuViewModelTest {
     @get:Rule
     val mainDispatcherRule = MainDispatcherRule()
 
-    private fun createViewModel() = MenuViewModel(GetGamesUseCase())
+    private fun createViewModel() = MenuViewModel(MenuUseCase())
 
     @Test
     fun `games are loaded when the state is collected`() = runTest {
@@ -32,7 +32,6 @@ class MenuViewModelTest {
     @Test
     fun `game clicked opens that game`() = runTest {
         val viewModel = createViewModel()
-        // SharedFlow has no replay: subscribe before the intent or the effect is lost.
         val effect = async(UnconfinedTestDispatcher(testScheduler)) { viewModel.effect.first() }
 
         viewModel.handle(MenuIntent.GameClicked(MiniGame.MEMORY))

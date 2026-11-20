@@ -45,6 +45,7 @@
 - 2026-10-13: versiones de MG-2, compatibles con Android Studio Ladybug: Kotlin 2.0.21, KSP 2.0.21-1.0.28, Hilt 2.55, Navigation 2.8.5, Compose BOM 2024.12.01.
 - 2026-11-06: patrón de pantalla (cambio del usuario): `<Game>Screen` con ViewModel + `<Game>ScreenScaffold` privado, sin `Route`. El ViewModel expone `handle(intent)`, `uiState` y `effect`.
 - 2026-11-06: los efectos usan `MutableSharedFlow` en lugar de `Channel`. Sin `replay`, se pierden si nadie los está recogiendo (decisión del usuario).
+- 2026-11-18: los casos de uso se agrupan por tema: `NounUseCase` con un método por acción (`PokemonUseCase.getRandomPokemon()`, `MenuUseCase.getGames()`), en lugar de una clase `VerbNounUseCase` por acción (decisión del usuario).
 - 2026-11-06: las rutas se llaman como su pantalla (`MenuScreen`, `MemoryScreen`), sin sufijo `Destination` (cambio del usuario).
 
 ## Pendiente / dudas

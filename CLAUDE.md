@@ -22,7 +22,7 @@ com/antonio/minigames/
 │   └── theme/            # colores, tipografía
 ├── data/memory/
 ├── domain/
-│   ├── menu/             # MiniGame + GetGamesUseCase
+│   ├── menu/             # MiniGame + MenuUseCase
 │   └── memory/
 ├── presentation/
 │   ├── navigation/       # rutas @Serializable + NavHost
