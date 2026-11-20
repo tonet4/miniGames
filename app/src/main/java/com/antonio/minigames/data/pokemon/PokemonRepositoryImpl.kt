@@ -11,25 +11,15 @@ class PokemonRepositoryImpl @Inject constructor(
 ) : PokemonRepository {
 
     override suspend fun getPokemonCount(): Result<Int> =
-        dataSource.getPokemonPage(limit = 1, offset = 0)
-            ?.let { Result.success(it.count) }
-            ?: failure("Could not load Pokémon count")
+        dataSource.getPokemonPage(limit = 1, offset = 0).map { it.count }
 
     override suspend fun getPokemonSpeciesCount(): Result<Int> =
-        dataSource.getPokemonSpeciesPage(limit = 1, offset = 0)
-            ?.let { Result.success(it.count) }
-            ?: failure("Could not load Pokémon species count")
+        dataSource.getPokemonSpeciesPage(limit = 1, offset = 0).map { it.count }
 
     override suspend fun getPokemonNames(limit: Int, offset: Int): Result<List<String>> =
         dataSource.getPokemonPage(limit = limit, offset = offset)
-            ?.let { page -> Result.success(page.results.map { it.name }) }
-            ?: failure("Could not load Pokémon page (limit=$limit, offset=$offset)")
+            .map { page -> page.results.map { it.name } }
 
     override suspend fun getPokemon(idOrName: String): Result<Pokemon> =
-        dataSource.getPokemonCharacteristics(idOrName)
-            ?.let { Result.success(it.toDomain()) }
-            ?: failure("Could not load Pokémon $idOrName")
-
-    private fun <T> failure(message: String): Result<T> =
-        Result.failure(IllegalStateException(message))
+        dataSource.getPokemonCharacteristics(idOrName).map { it.toDomain() }
 }

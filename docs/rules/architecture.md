@@ -11,9 +11,11 @@ com.antonio.minigames
 ├── ui/
 │   └── theme/                # colores, tipografía, formas
 ├── data/
+│   ├── error/                # safeApiCall: excepciones de Retrofit → AppError
 │   ├── memory/               # repositorios, fuentes de datos y mappers del Memory
 │   └── <game>/
 ├── domain/
+│   ├── error/                # AppError, compartido por todos los juegos
 │   ├── menu/                 # model/MiniGame.kt + usecase/MenuUseCase.kt
 │   ├── memory/               # modelos, interfaces de repositorio y casos de uso del Memory
 │   └── <game>/
@@ -51,6 +53,16 @@ presentation ──► domain ◄── data
 - `presentation` solo habla con `domain` (casos de uso o repositorios), nunca con `data`.
 - `di` es lo único que conoce las implementaciones de `data` y las enlaza (`@Binds`).
 - Un juego **no** importa nada de otro juego. Lo que se comparte va a `ui/theme` (tema visual) o a `presentation/navigation` (navegación). No existe carpeta `core/`. No hay ViewModel base: ver [`mvi.md`](mvi.md).
+
+## Errores
+- `domain/error/AppError.kt`: `sealed class` que hereda de `Exception`, con los errores que entiende la app:
+  - `NoConnection`: no hay internet
+  - `ServerError`: el servidor respondió 5xx
+  - `Unexpected(error)`: cualquier otra cosa; guarda la excepción original como `cause`
+- `data/error/SafeApiCall.kt`: `safeApiCall { api.call() }` envuelve cada llamada de Retrofit y devuelve `Result<T>`. Convierte `IOException` en `NoConnection`, un 5xx en `ServerError` y lo demás en `Unexpected`.
+- Los datasources y repositorios devuelven `Result<T>` y nunca `null` para indicar un error. Los repositorios transforman con `.map { }`.
+- Los casos de uso no usan `runCatching`, porque captura la `CancellationException`. Usan `try/catch`: primero relanzan la `CancellationException`, después dejan pasar los `AppError` y el resto lo envuelven en `AppError.Unexpected`.
+- `presentation` solo ve `AppError` y elige el mensaje (en `strings.xml`) para cada caso con un `when` sin `else`.
 
 ## Temas de juego
 Las imágenes y textos de cada tema (genérico, dibujos…) salen de `data`. La lógica del juego no sabe de qué dibujos son las cartas.
