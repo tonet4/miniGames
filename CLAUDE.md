@@ -18,10 +18,14 @@ Un solo módulo `:app`, organizado **primero por capa y luego por juego**. Detal
 
 ```
 com/antonio/minigames/
-├── core/                 # mvi base, ui/theme, navigation
+├── ui/
+│   └── theme/            # colores, tipografía
 ├── data/memory/
-├── domain/memory/
+├── domain/
+│   ├── menu/             # MiniGame + MenuUseCase
+│   └── memory/
 ├── presentation/
+│   ├── navigation/       # rutas @Serializable + NavHost
 │   ├── menu/
 │   └── memory/
 └── di/
@@ -32,11 +36,13 @@ com/antonio/minigames/
 |------|---------|
 | Arquitectura y carpetas | [`docs/rules/architecture.md`](docs/rules/architecture.md) |
 | Git, ramas y commits | [`docs/rules/git.md`](docs/rules/git.md) |
+| Hilt e inyección | [`docs/rules/hilt.md`](docs/rules/hilt.md) |
+| MVI (State / Intent / Effect) | [`docs/rules/mvi.md`](docs/rules/mvi.md) |
 
 Las reglas crecen paso a paso: cuando se toma una decisión nueva, se añade o ajusta aquí en el mismo PR.
 
 ## Forma de trabajar
 - **Pasos pequeños**: un paso del roadmap = una rama = un PR. Nunca más de uno a la vez.
 - Al terminar un paso: resumen con árbol de archivos y snippets, actualizar `docs/PROGRESS.md` y **esperar la revisión** antes de seguir.
-- Código, nombres y comentarios en **inglés**. Docs y commits en **español**.
+- Código, nombres, comentarios, ramas y commits en **inglés** (`feature/MG-<n>-...`, `[MG-<n>]: ...`). Docs en **español**.
 - Contenido con personajes de dibujos: solo uso personal. Los temas tienen que poder cambiarse sin tocar la lógica del juego.
