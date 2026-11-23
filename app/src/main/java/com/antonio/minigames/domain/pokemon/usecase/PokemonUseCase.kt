@@ -2,7 +2,7 @@ package com.antonio.minigames.domain.pokemon.usecase
 
 import com.antonio.minigames.domain.error.AppError
 import com.antonio.minigames.domain.pokemon.PokemonRepository
-import com.antonio.minigames.domain.pokemon.model.Pokemon
+import com.antonio.minigames.domain.pokemon.entity.Pokemon
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll

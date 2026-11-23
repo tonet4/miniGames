@@ -1,6 +1,6 @@
 package com.antonio.minigames.presentation.menu
 
-import com.antonio.minigames.domain.menu.model.MiniGame
+import com.antonio.minigames.domain.menu.entity.MiniGame
 
 data class MenuUiState(
     val games: List<GameItem> = emptyList(),

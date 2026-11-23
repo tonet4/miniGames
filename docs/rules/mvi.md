@@ -15,12 +15,13 @@
 ## Sin clase base
 **No hay ViewModel base ni interfaces compartidas.** Cada pantalla tiene **su propio Contract y su propio ViewModel**, que extiende directamente de `ViewModel()`.
 
-## Cada pantalla = 3 archivos en `presentation/<game>/`
+## Cada pantalla = 3 archivos + `components/` en `presentation/<game>/`
 ```
 presentation/memory/
 ├── MemoryContract.kt    ← State + Intent + Effect
 ├── MemoryViewModel.kt
-└── MemoryScreen.kt      ← MemoryScreen (con ViewModel) + MemoryScreenScaffold (privado, sin ViewModel)
+├── MemoryScreen.kt      ← MemoryScreen (con ViewModel) + MemoryScreenScaffold + MemoryContent + preview
+└── components/          ← un archivo por componente, con su propia preview
 ```
 
 ### Contract
@@ -77,7 +78,7 @@ val uiState: StateFlow<MenuUiState> = _uiState
 - `Lazily`: carga una sola vez. Con `WhileSubscribed` se recargaría al volver a la pantalla.
 - En los tests hay que recoger el estado antes de comprobarlo: `backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { vm.uiState.collect {} }`.
 
-### Screen: Screen + Scaffold
+### Screen: Screen + Scaffold + Content
 ```kotlin
 @Composable
 fun MemoryScreen(viewModel: MemoryViewModel = hiltViewModel(), onNavigateBack: () -> Unit) {
@@ -91,18 +92,37 @@ fun MemoryScreen(viewModel: MemoryViewModel = hiltViewModel(), onNavigateBack: (
         }
     }
 
-    MemoryScreenScaffold(uiState = uiState, onIntent = viewModel::handle)
+    MemoryScreenScaffold(
+        cards = uiState.cards,
+        moves = uiState.moves,
+        isFinished = uiState.isFinished,
+        onIntent = viewModel::handle,
+    )
 }
 
 @Composable
-private fun MemoryScreenScaffold(uiState: MemoryUiState, onIntent: (MemoryIntent) -> Unit) { /* solo UI */ }
+private fun MemoryScreenScaffold(
+    cards: List<CardUi>,
+    moves: Int,
+    isFinished: Boolean,
+    onIntent: (MemoryIntent) -> Unit,
+) {
+    Scaffold(topBar = { /* ... */ }) { innerPadding ->
+        MemoryContent(/* campos y onIntent */, modifier = Modifier.padding(innerPadding))
+    }
+}
+
+@Composable
+private fun MemoryContent(/* campos y onIntent */, modifier: Modifier = Modifier) { /* usa components/ */ }
 ```
 
 ## Reglas
 - Una única función pública de entrada: `handle(intent)`. La pantalla solo envía Intents.
 - `_uiState` y `_uiEffect` son privados. Se exponen como `StateFlow` y `SharedFlow` de solo lectura.
 - El State solo se cambia con `_uiState.update { it.copy(...) }`.
-- `MemoryScreenScaffold` **no** conoce el ViewModel: recibe `uiState` y `onIntent`. La `@Preview` usa el Scaffold, porque `hiltViewModel()` no funciona en previews.
+- `MemoryScreenScaffold` **no** conoce el ViewModel ni el `UiState`: recibe los campos del estado **uno a uno** y `onIntent`. La `@Preview` usa el Scaffold, porque `hiltViewModel()` no funciona en previews.
+- El Scaffold solo coloca la estructura y llama a `<Game>Content`. En `<Game>Screen.kt` no hay más composables que Screen, Scaffold, Content y su preview.
+- Los demás composables van en `components/`, uno por archivo y con su `@Preview`. Reciben datos y lambdas, nunca `Intent`.
 - La lógica del juego (barajar, comprobar pareja…) va en `domain`, no en el ViewModel. El ViewModel orquesta.
 - La navegación sale como Effect y `MemoryScreen` la convierte en lambda (`onNavigateBack`). El ViewModel nunca recibe un `NavController`.
 

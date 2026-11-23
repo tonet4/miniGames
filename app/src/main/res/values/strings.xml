@@ -2,6 +2,12 @@
     <string name="app_name">Mini Juegos</string>
     <string name="menu_title">¡A jugar!</string>
     <string name="game_memory">Memory</string>
-    <string name="coming_soon">¡Muy pronto!</string>
+    <string name="memory_hidden_card">Carta boca abajo</string>
+    <string name="memory_win">¡Muy bien!</string>
+    <string name="play_again">Otra vez</string>
+    <string name="retry">Reintentar</string>
+    <string name="error_no_connection">No hay conexión a internet</string>
+    <string name="error_server">El servidor no responde. Prueba más tarde</string>
+    <string name="error_unexpected">Algo ha salido mal</string>
     <string name="back">Volver</string>
 </resources>
