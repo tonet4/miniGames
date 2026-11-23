@@ -3,7 +3,7 @@ package com.antonio.minigames.data.pokemon
 import com.antonio.minigames.data.pokemon.datasource.PokemonDataSource
 import com.antonio.minigames.data.pokemon.mapper.toDomain
 import com.antonio.minigames.domain.pokemon.PokemonRepository
-import com.antonio.minigames.domain.pokemon.model.Pokemon
+import com.antonio.minigames.domain.pokemon.entity.Pokemon
 import javax.inject.Inject
 
 class PokemonRepositoryImpl @Inject constructor(

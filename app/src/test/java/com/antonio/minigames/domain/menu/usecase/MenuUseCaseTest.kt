@@ -1,6 +1,6 @@
 package com.antonio.minigames.domain.menu.usecase
 
-import com.antonio.minigames.domain.menu.model.MiniGame
+import com.antonio.minigames.domain.menu.entity.MiniGame
 import org.junit.Assert.assertEquals
 import org.junit.Test
 

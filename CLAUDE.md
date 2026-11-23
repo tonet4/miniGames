@@ -38,6 +38,7 @@ com/antonio/minigames/
 | Git, ramas y commits | [`docs/rules/git.md`](docs/rules/git.md) |
 | Hilt e inyección | [`docs/rules/hilt.md`](docs/rules/hilt.md) |
 | MVI (State / Intent / Effect) | [`docs/rules/mvi.md`](docs/rules/mvi.md) |
+| Tests | [`docs/rules/testing.md`](docs/rules/testing.md) |
 
 Las reglas crecen paso a paso: cuando se toma una decisión nueva, se añade o ajusta aquí en el mismo PR.
 
