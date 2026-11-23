@@ -29,6 +29,8 @@ La primera vez sigue el modo del sistema; después manda lo que se elija con el 
 | `display*`, `headline*`, `title*` | Press Start 2P (textos cortos) |
 | `body*`, `label*` | VT323 (textos y botones) |
 
+**Excepción:** lo que la niña tiene que leer usa `ReadingTypography` (sans serif en negrita), porque la fuente de píxel cuesta de leer.
+
 Las dos tienen licencia OFL (copia en `docs/licenses/`).
 
 ## Piezas compartidas (`presentation/shared/components/`)
@@ -43,4 +45,4 @@ Las dos tienen licencia OFL (copia en `docs/licenses/`).
 Icono adaptativo (`ic_launcher_foreground` + `ic_launcher_background`) con el mismo mando del splash, en colores fijos.
 
 ## Portadas del menú
-`GameItem.coverUrl`. Mientras carga, o si no hay internet, se ve `ic_gamepad`.
+`GameItem.coverUrl` (por internet) o `coverRes` (dibujo local). `coverRes` también se ve mientras carga o si no hay internet.

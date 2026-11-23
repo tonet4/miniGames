@@ -11,4 +11,7 @@
     <string name="back">Volver</string>
     <string name="switch_to_light">Cambiar a modo claro</string>
     <string name="switch_to_dark">Cambiar a modo oscuro</string>
+    <string name="game_syllables">Sílabas</string>
+    <string name="listen_word">Escuchar la palabra</string>
+    <string name="next_word">Siguiente</string>
 </resources>

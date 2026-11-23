@@ -20,7 +20,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
-import com.antonio.minigames.R
 import com.antonio.minigames.domain.menu.entity.MiniGame
 import com.antonio.minigames.presentation.menu.GameItem
 import com.antonio.minigames.presentation.menu.toGameItem
@@ -42,8 +41,8 @@ fun GameCard(
         AsyncImage(
             model = item.coverUrl,
             contentDescription = null,
-            placeholder = painterResource(R.drawable.ic_gamepad),
-            error = painterResource(R.drawable.ic_gamepad),
+            placeholder = painterResource(item.coverRes),
+            error = painterResource(item.coverRes),
             modifier = Modifier
                 .weight(1f)
                 .fillMaxWidth()

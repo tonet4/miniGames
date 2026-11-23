@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="172dp"
+    android:height="220dp"
+    android:viewportWidth="43"
+    android:viewportHeight="55">
+    <path
+        android:fillColor="#2B1D40"
+        android:pathData="M13,4h17v15h-17z M12,5h19v13h-19z" />
+    <path
+        android:fillColor="#F2B134"
+        android:pathData="M13,5h17v13h-17z" />
+    <path
+        android:fillColor="#FBE0A3"
+        android:pathData="M13,5h17v1h-17z" />
+    <path
+        android:fillColor="#2B1D40"
+        android:pathData="M13,16h17v2h-17z" />
+    <path
+        android:fillColor="#F2B134"
+        android:pathData="M13,16h17v1h-17z" />
+    <path
+        android:fillColor="#2B1D40"
+        android:pathData="M17,7h1v1h-1z M18,7h1v1h-1z M19,7h1v1h-1z M20,7h1v1h-1z M16,8h1v1h-1z M16,9h1v1h-1z M17,10h1v1h-1z M18,10h1v1h-1z M19,10h1v1h-1z M20,11h1v1h-1z M20,12h1v1h-1z M16,13h1v1h-1z M17,13h1v1h-1z M18,13h1v1h-1z M19,13h1v1h-1z M23,7h1v1h-1z M24,7h1v1h-1z M25,7h1v1h-1z M22,8h1v1h-1z M26,8h1v1h-1z M22,9h1v1h-1z M26,9h1v1h-1z M22,10h1v1h-1z M26,10h1v1h-1z M22,11h1v1h-1z M26,11h1v1h-1z M22,12h1v1h-1z M26,12h1v1h-1z M23,13h1v1h-1z M24,13h1v1h-1z M25,13h1v1h-1z M3,20h17v15h-17z M2,21h19v13h-19z" />
+    <path
+        android:fillColor="#C23B22"
+        android:pathData="M3,21h17v13h-17z" />
+    <path
+        android:fillColor="#F08A70"
+        android:pathData="M3,21h17v1h-17z" />
+    <path
+        android:fillColor="#2B1D40"
+        android:pathData="M3,32h17v2h-17z" />
+    <path
+        android:fillColor="#C23B22"
+        android:pathData="M3,32h17v1h-17z" />
+    <path
+        android:fillColor="#FFF8E5"
+        android:pathData="M6,23h1v1h-1z M10,23h1v1h-1z M6,24h1v1h-1z M7,24h1v1h-1z M9,24h1v1h-1z M10,24h1v1h-1z M6,25h1v1h-1z M8,25h1v1h-1z M10,25h1v1h-1z M6,26h1v1h-1z M8,26h1v1h-1z M10,26h1v1h-1z M6,27h1v1h-1z M10,27h1v1h-1z M6,28h1v1h-1z M10,28h1v1h-1z M6,29h1v1h-1z M10,29h1v1h-1z M13,23h1v1h-1z M14,23h1v1h-1z M15,23h1v1h-1z M12,24h1v1h-1z M16,24h1v1h-1z M12,25h1v1h-1z M16,25h1v1h-1z M12,26h1v1h-1z M13,26h1v1h-1z M14,26h1v1h-1z M15,26h1v1h-1z M16,26h1v1h-1z M12,27h1v1h-1z M16,27h1v1h-1z M12,28h1v1h-1z M16,28h1v1h-1z M12,29h1v1h-1z M16,29h1v1h-1z" />
+    <path
+        android:fillColor="#2B1D40"
+        android:pathData="M23,20h17v15h-17z M22,21h19v13h-19z" />
+    <path
+        android:fillColor="#176B70"
+        android:pathData="M23,21h17v13h-17z" />
+    <path
+        android:fillColor="#4FA8A6"
+        android:pathData="M23,21h17v1h-17z" />
+    <path
+        android:fillColor="#2B1D40"
+        android:pathData="M23,32h17v2h-17z" />
+    <path
+        android:fillColor="#176B70"
+        android:pathData="M23,32h17v1h-17z" />
+    <path
+        android:fillColor="#FFF8E5"
+        android:pathData="M26,23h1v1h-1z M27,23h1v1h-1z M28,23h1v1h-1z M29,23h1v1h-1z M26,24h1v1h-1z M30,24h1v1h-1z M26,25h1v1h-1z M30,25h1v1h-1z M26,26h1v1h-1z M27,26h1v1h-1z M28,26h1v1h-1z M29,26h1v1h-1z M26,27h1v1h-1z M26,28h1v1h-1z M26,29h1v1h-1z M33,23h1v1h-1z M34,23h1v1h-1z M35,23h1v1h-1z M32,24h1v1h-1z M36,24h1v1h-1z M32,25h1v1h-1z M36,25h1v1h-1z M32,26h1v1h-1z M33,26h1v1h-1z M34,26h1v1h-1z M35,26h1v1h-1z M36,26h1v1h-1z M32,27h1v1h-1z M36,27h1v1h-1z M32,28h1v1h-1z M36,28h1v1h-1z M32,29h1v1h-1z M36,29h1v1h-1z" />
+    <path
+        android:fillColor="#2B1D40"
+        android:pathData="M13,36h17v15h-17z M12,37h19v13h-19z" />
+    <path
+        android:fillColor="#7A4FC0"
+        android:pathData="M13,37h17v13h-17z" />
+    <path
+        android:fillColor="#B99BE8"
+        android:pathData="M13,37h17v1h-17z" />
+    <path
+        android:fillColor="#2B1D40"
+        android:pathData="M13,48h17v2h-17z" />
+    <path
+        android:fillColor="#7A4FC0"
+        android:pathData="M13,48h17v1h-17z" />
+    <path
+        android:fillColor="#FFF8E5"
+        android:pathData="M16,39h1v1h-1z M16,40h1v1h-1z M16,41h1v1h-1z M16,42h1v1h-1z M16,43h1v1h-1z M16,44h1v1h-1z M16,45h1v1h-1z M17,45h1v1h-1z M18,45h1v1h-1z M19,45h1v1h-1z M20,45h1v1h-1z M22,39h1v1h-1z M26,39h1v1h-1z M22,40h1v1h-1z M26,40h1v1h-1z M22,41h1v1h-1z M26,41h1v1h-1z M22,42h1v1h-1z M26,42h1v1h-1z M22,43h1v1h-1z M26,43h1v1h-1z M22,44h1v1h-1z M26,44h1v1h-1z M23,45h1v1h-1z M24,45h1v1h-1z M25,45h1v1h-1z" />
+</vector>

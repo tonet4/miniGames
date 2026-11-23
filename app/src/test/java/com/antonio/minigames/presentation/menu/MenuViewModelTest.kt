@@ -31,7 +31,7 @@ class MenuViewModelTest {
         val viewModel = createViewModel()
         backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { viewModel.uiState.collect {} }
 
-        assertEquals(listOf(MiniGame.MEMORY), viewModel.uiState.value.games.map { it.game })
+        assertEquals(MiniGame.entries.toList(), viewModel.uiState.value.games.map { it.game })
     }
 
     @Test

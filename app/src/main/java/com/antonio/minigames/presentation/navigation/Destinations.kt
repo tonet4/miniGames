@@ -7,3 +7,6 @@ data object MenuScreen
 
 @Serializable
 data object MemoryScreen
+
+@Serializable
+data object SyllablesScreen

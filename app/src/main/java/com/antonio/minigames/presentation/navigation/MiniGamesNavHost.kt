@@ -9,6 +9,7 @@ import androidx.navigation.compose.rememberNavController
 import com.antonio.minigames.domain.menu.entity.MiniGame
 import com.antonio.minigames.presentation.memory.MemoryScreen
 import com.antonio.minigames.presentation.menu.MenuScreen
+import com.antonio.minigames.presentation.syllables.SyllablesScreen
 
 @Composable
 fun MiniGamesNavHost(
@@ -26,9 +27,13 @@ fun MiniGamesNavHost(
         composable<MemoryScreen> {
             MemoryScreen (onNavigateBack = { navController.popBackStack() })
         }
+        composable<SyllablesScreen> {
+            SyllablesScreen(onNavigateBack = { navController.popBackStack() })
+        }
     }
 }
 
 private fun MiniGame.toDestination(): Any = when (this) {
     MiniGame.MEMORY -> MemoryScreen
+    MiniGame.SYLLABLES -> SyllablesScreen
 }
