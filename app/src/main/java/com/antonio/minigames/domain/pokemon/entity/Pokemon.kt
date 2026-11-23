@@ -1,4 +1,4 @@
-package com.antonio.minigames.domain.pokemon.model
+package com.antonio.minigames.domain.pokemon.entity
 
 data class Pokemon(
     val id: Int,

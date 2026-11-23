@@ -1,6 +1,6 @@
 package com.antonio.minigames.domain.pokemon
 
-import com.antonio.minigames.domain.pokemon.model.Pokemon
+import com.antonio.minigames.domain.pokemon.entity.Pokemon
 
 interface PokemonRepository {
 

@@ -2,7 +2,7 @@ package com.antonio.minigames.presentation.menu
 
 import androidx.annotation.StringRes
 import com.antonio.minigames.R
-import com.antonio.minigames.domain.menu.model.MiniGame
+import com.antonio.minigames.domain.menu.entity.MiniGame
 
 data class GameItem(
     val game: MiniGame,
