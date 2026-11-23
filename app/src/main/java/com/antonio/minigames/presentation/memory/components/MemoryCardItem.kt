@@ -21,8 +21,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.antonio.minigames.R
@@ -48,6 +47,7 @@ fun MemoryCardItem(
 
     Card(
         onClick = onClick,
+        shape = MaterialTheme.shapes.medium,
         modifier = modifier
             .graphicsLayer {
                 rotationY = rotation
@@ -62,11 +62,10 @@ fun MemoryCardItem(
             },
         ),
         border = if (card.state == CardState.Matched) {
-            BorderStroke(4.dp, MaterialTheme.colorScheme.secondary)
+            BorderStroke(5.dp, MaterialTheme.colorScheme.secondary)
         } else {
-            null
+            BorderStroke(3.dp, MaterialTheme.colorScheme.outline)
         },
-        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
     ) {
         Box(
             modifier = Modifier
@@ -87,7 +86,6 @@ fun MemoryCardItem(
                 Text(
                     text = "?",
                     style = MaterialTheme.typography.displayMedium,
-                    fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onPrimary,
                 )
             }
@@ -95,7 +93,7 @@ fun MemoryCardItem(
     }
 }
 
-@Preview(showBackground = true)
+@PreviewLightDark
 @Composable
 private fun MemoryCardItemPreview() {
     MinigamesTheme {

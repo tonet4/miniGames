@@ -8,22 +8,22 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.antonio.minigames.R
 import com.antonio.minigames.domain.menu.entity.MiniGame
 import com.antonio.minigames.presentation.menu.components.GameCard
+import com.antonio.minigames.presentation.menu.components.MenuHeader
+import com.antonio.minigames.presentation.menu.components.ThemeToggle
+import com.antonio.minigames.presentation.shared.components.retroBackground
+import com.antonio.minigames.presentation.shared.isDark
 import com.antonio.minigames.ui.theme.MinigamesTheme
 
 @Composable
@@ -43,6 +43,7 @@ fun MenuScreen(
 
     MenuScreenScaffold(
         games = uiState.games,
+        isDarkTheme = uiState.themeMode.isDark(),
         onIntent = viewModel::handle,
     )
 }
@@ -50,11 +51,13 @@ fun MenuScreen(
 @Composable
 private fun MenuScreenScaffold(
     games: List<GameItem>,
+    isDarkTheme: Boolean,
     onIntent: (MenuIntent) -> Unit,
 ) {
     Scaffold { innerPadding ->
         MenuContent(
             games = games,
+            isDarkTheme = isDarkTheme,
             onIntent = onIntent,
             modifier = Modifier.padding(innerPadding),
         )
@@ -64,26 +67,28 @@ private fun MenuScreenScaffold(
 @Composable
 private fun MenuContent(
     games: List<GameItem>,
+    isDarkTheme: Boolean,
     onIntent: (MenuIntent) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
         modifier = modifier
             .fillMaxSize()
+            .retroBackground()
             .padding(24.dp),
         verticalArrangement = Arrangement.spacedBy(24.dp),
     ) {
-        Text(
-            text = stringResource(R.string.menu_title),
-            style = MaterialTheme.typography.displaySmall,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colorScheme.primary,
+        ThemeToggle(
+            isDarkTheme = isDarkTheme,
+            onThemeSelected = { themeMode -> onIntent(MenuIntent.ThemeSelected(themeMode)) },
+            modifier = Modifier.align(Alignment.End),
         )
+        MenuHeader()
         LazyVerticalGrid(
             columns = GridCells.Adaptive(minSize = 160.dp),
             horizontalArrangement = Arrangement.spacedBy(16.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp),
-            contentPadding = PaddingValues(bottom = 24.dp),
+            contentPadding = PaddingValues(end = 4.dp, bottom = 24.dp),
         ) {
             items(games, key = { it.game }) { item ->
                 GameCard(
@@ -95,12 +100,13 @@ private fun MenuContent(
     }
 }
 
-@Preview(showBackground = true)
+@PreviewLightDark
 @Composable
 private fun MenuScreenPreview() {
     MinigamesTheme {
         MenuScreenScaffold(
             games = listOf(MiniGame.MEMORY.toGameItem()),
+            isDarkTheme = false,
             onIntent = {},
         )
     }

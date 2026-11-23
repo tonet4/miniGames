@@ -48,12 +48,12 @@ di/ColorsModule.kt
 ```
 presentation ──► domain ◄── data
 ```
-- `domain` es Kotlin puro: **no** importa Android, Compose ni Hilt (como mucho `javax.inject.Inject`). Nada de `R`, `@StringRes` ni imports de `presentation`: los textos, emojis e imágenes se resuelven en `presentation` con un mapper (p. ej. `MiniGame.toGameItem()`).
+- `domain` es Kotlin puro: **no** importa Android, Compose ni Hilt (como mucho `javax.inject.Inject`). Nada de `R`, `@StringRes` ni imports de `presentation`: los textos e imágenes se resuelven en `presentation` con un mapper (p. ej. `MiniGame.toGameItem()`).
 - `domain` define las interfaces de repositorio y `data` las implementa.
 - `presentation` solo habla con `domain` (casos de uso o repositorios), nunca con `data`.
 - `di` es lo único que conoce las implementaciones de `data` y las enlaza (`@Binds`).
 - Los mappers entre entidades van en `domain/<game>/mapper/` (`Pokemon.toMemoryItem()`); los que crean modelos de UI, en `presentation`.
-- Un juego **no** importa nada de otro juego. `pokemon` no es un juego, sino una fuente de datos compartida. Lo que se comparte va a `ui/theme` (tema visual) o a `presentation/navigation` (navegación). No existe carpeta `core/`. No hay ViewModel base: ver [`mvi.md`](mvi.md).
+- Un juego **no** importa nada de otro juego. `pokemon` (fuente de datos) y `settings` (ajustes de la app) no son juegos: se comparten. Lo que se comparte va a `ui/theme` (tema visual) o a `presentation/navigation` (navegación). No existe carpeta `core/`. No hay ViewModel base: ver [`mvi.md`](mvi.md).
 
 ## Errores
 - `domain/error/AppError.kt`: `sealed class` que hereda de `Exception`, con los errores que entiende la app:
@@ -88,5 +88,5 @@ Las imágenes y textos de cada tema (genérico, dibujos…) salen de `data`. La 
 - Las pantallas no conocen el `NavController`: su composable `<Game>Screen` recibe lambdas (`onNavigateBack`, `onOpenGame`).
 - Añadir un juego nuevo al menú supone tres cambios:
   1. Añadir un valor a `MiniGame` (en `domain/menu/entity/MiniGame.kt`). `MenuUseCase.getGames()` lo devuelve solo.
-  2. Añadir su rama en `MiniGame.toGameItem()` (`presentation/menu/GameItem.kt`): título y emoji.
+  2. Añadir su rama en `MiniGame.toGameItem()` (`presentation/menu/GameItem.kt`): título y portada.
   3. Añadir su ruta en `Destinations.kt`, su `composable<>` y su entrada en `toDestination()`.

@@ -9,7 +9,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import com.antonio.minigames.domain.memory.entity.CardState
 import com.antonio.minigames.domain.memory.entity.MemoryCard
@@ -50,7 +50,7 @@ fun MemoryGrid(
     }
 }
 
-@Preview(showBackground = true)
+@PreviewLightDark
 @Composable
 private fun MemoryGridPreview() {
     MinigamesTheme {

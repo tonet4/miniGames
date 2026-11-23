@@ -1,8 +1,8 @@
 # Progreso
 
-**Paso actual:** MG-6 + MG-7 en la misma rama — dominio y pantalla jugable del Memory con Pokémon (pasos 4 y 6, en revisión). MG-5 (gestión de errores) ya está mergeado en `develop`. Siguiente: paso 7 (dificultades).
+**Paso actual:** MG-8 — diseño retro claro/oscuro, tipografía, splash y portada del Memory (paso 10, adelantado, en revisión). MG-6 + MG-7 ya están mergeados en `develop`. Siguiente: paso 7 (dificultades).
 
-> ⏸️ **Retomar aquí (2026-11-23):** en la rama `feature/MG-6-memory-screen` el código está commiteado y subido. Falta abrir el PR contra `develop` y mergearlo. Pedir permiso antes de cualquier acción de git.
+> ⏸️ **Retomar aquí (2026-11-23):** en la rama `feature/MG-8-retro-design` el código está commiteado y subido. Falta abrir el PR contra `develop` y mergearlo. Compila el usuario. Pedir permiso antes de cualquier commit, push o PR.
 
 ## Roadmap
 - [x] **0. Base de conocimiento**: git, `CLAUDE.md`, `PROGRESS.md`, reglas de arquitectura y git
@@ -14,8 +14,8 @@
 - [x] **6. Presentación Memory** (MG-7): `MemoryViewModel` + `MemoryScreen`; el juego se puede jugar
 - [ ] **7. Dificultades**: 4 / 6 / 8 parejas, layout adaptable a tablet
 - [ ] **8. Celebración al ganar**: animación + "otra vez"
-- [ ] **9. Stitch**: alta, API key y configuración del MCP
-- [ ] **10. Rediseño con Stitch**: menú + Memory + `rules/compose-ui.md`
+- [ ] **9. Stitch** (aplazado): alta, API key y configuración del MCP
+- [x] **10. Rediseño retro** (MG-8, sin Stitch): menú + Memory + splash + `rules/compose-ui.md`
 - [ ] **11. Tema de dibujos + skill `new-game`**
 
 ## Entorno
@@ -57,6 +57,8 @@
 - 2026-11-23: `<Game>Screen.kt` solo tiene Screen, Scaffold, `<Game>Content` y preview; los componentes van en `components/` con su propia preview (decisión del usuario).
 
 - 2026-11-23: el Memory pasa de 4 a 9 parejas (18 cartas): 3 columnas en vertical y 6 en horizontal. Las dificultades siguen en el paso 7.
+- 2026-11-23: diseño retro propio con modo claro y oscuro, sin esperar a Stitch (decisión del usuario). Fuentes Press Start 2P y VT323. La portada del Memory se carga por URL para no guardar arte de Pokémon en el repo.
+- 2026-11-23: botón de modo claro/oscuro en la home; la elección se guarda con DataStore 1.1.1 (`settings`). `MainViewModel` da el tema a `MainActivity`.
 
 ## Pendiente / dudas
 - Actualizar Android Studio para poder usar AGP 8.9+ y SDK 36 (opcional).
