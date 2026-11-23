@@ -1,8 +1,8 @@
 # Progreso
 
-**Paso actual:** MG-3 — pasos 2 y 3: reglas MVI + tema provisional + navegación + menú (en revisión). Siguiente: MG-4, paso 4 (dominio del Memory).
+**Paso actual:** MG-5 — gestión de errores con `AppError` + `safeApiCall` (en revisión). MG-4 (capa de datos de PokéAPI) ya está mergeado. Siguiente: paso 4 (dominio del Memory).
 
-> ⏸️ **Retomar aquí (2026-11-06):** en la rama `feature/MG-3-mvi-base`, el código del menú, la navegación y el tema está **commiteado, sin push**. Falta probar la navegación en un dispositivo, subir la rama y abrir el PR contra `develop`. Pedir permiso antes de cualquier acción de git.
+> ⏸️ **Retomar aquí (2026-11-20):** en la rama `feature/MG-5-app-error` el código compila y los tests pasan, pero **no está commiteado**. Falta que el usuario lo revise, y después el commit, el push y el PR contra `develop`. Pedir permiso antes de cualquier acción de git.
 
 ## Roadmap
 - [x] **0. Base de conocimiento**: git, `CLAUDE.md`, `PROGRESS.md`, reglas de arquitectura y git
@@ -47,6 +47,8 @@
 - 2026-11-06: los efectos usan `MutableSharedFlow` en lugar de `Channel`. Sin `replay`, se pierden si nadie los está recogiendo (decisión del usuario).
 - 2026-11-18: los casos de uso se agrupan por tema: `NounUseCase` con un método por acción (`PokemonUseCase.getRandomPokemon()`, `MenuUseCase.getGames()`), en lugar de una clase `VerbNounUseCase` por acción (decisión del usuario).
 - 2026-11-06: las rutas se llaman como su pantalla (`MenuScreen`, `MemoryScreen`), sin sufijo `Destination` (cambio del usuario).
+- 2026-11-20: gestión de errores (MG-5): `AppError` en `domain/error` (`NoConnection`, `ServerError`, `Unexpected(error)`) y `safeApiCall` en `data/error`. Se mantiene el `Result<T>` de Kotlin en lugar de un `Either` propio. Detalle en `rules/architecture.md`.
+- 2026-11-20: los PRs de MG-4 se mergearon en `main` por error; `develop` se puso al día con un fast-forward.
 
 ## Pendiente / dudas
 - Actualizar Android Studio para poder usar AGP 8.9+ y SDK 36 (opcional).
