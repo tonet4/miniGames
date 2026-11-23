@@ -3,7 +3,9 @@ package com.antonio.minigames.presentation.menu
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.antonio.minigames.domain.menu.usecase.MenuUseCase
+import com.antonio.minigames.domain.settings.usecase.SettingsUseCase
 import com.antonio.minigames.presentation.menu.MenuIntent.GameClicked
+import com.antonio.minigames.presentation.menu.MenuIntent.ThemeSelected
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -19,11 +21,15 @@ import javax.inject.Inject
 @HiltViewModel
 class MenuViewModel @Inject constructor(
     private val menuUseCase: MenuUseCase,
+    private val settingsUseCase: SettingsUseCase,
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(MenuUiState())
     val uiState: StateFlow<MenuUiState> = _uiState
-        .onStart { loadMenu() }
+        .onStart {
+            loadMenu()
+            observeThemeMode()
+        }
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.Lazily,
@@ -37,6 +43,17 @@ class MenuViewModel @Inject constructor(
         when (intent) {
             is GameClicked -> viewModelScope.launch {
                 _uiEffect.emit(MenuEffect.OpenGame(intent.game))
+            }
+            is ThemeSelected -> viewModelScope.launch {
+                settingsUseCase.setThemeMode(intent.themeMode)
+            }
+        }
+    }
+
+    private fun observeThemeMode() {
+        viewModelScope.launch {
+            settingsUseCase.observeThemeMode().collect { themeMode ->
+                _uiState.update { it.copy(themeMode = themeMode) }
             }
         }
     }

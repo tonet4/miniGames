@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Mini Juegos</string>
-    <string name="menu_title">¡A jugar!</string>
     <string name="game_memory">Memory</string>
     <string name="memory_hidden_card">Carta boca abajo</string>
     <string name="memory_win">¡Muy bien!</string>
@@ -10,4 +9,6 @@
     <string name="error_server">El servidor no responde. Prueba más tarde</string>
     <string name="error_unexpected">Algo ha salido mal</string>
     <string name="back">Volver</string>
+    <string name="switch_to_light">Cambiar a modo claro</string>
+    <string name="switch_to_dark">Cambiar a modo oscuro</string>
 </resources>

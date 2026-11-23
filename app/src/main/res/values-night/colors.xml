@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="window_background">#FF140F2D</color>
+    <color name="icon_outline">#FF3DE0E0</color>
+    <color name="icon_body">#FF33276A</color>
+    <color name="icon_pad">#FFF5EFFF</color>
+    <color name="icon_button_a">#FFFF6FB0</color>
+    <color name="icon_button_b">#FFFFD23F</color>
+</resources>

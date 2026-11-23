@@ -5,7 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import com.antonio.minigames.domain.memory.entity.CardState
 import com.antonio.minigames.domain.memory.entity.MemoryBoard
@@ -34,7 +34,7 @@ fun MemoryGame(
     }
 }
 
-@Preview(showBackground = true)
+@PreviewLightDark
 @Composable
 private fun MemoryGamePreview() {
     MinigamesTheme {

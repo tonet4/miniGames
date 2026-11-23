@@ -11,7 +11,7 @@ App Android de mini juegos para mi hija de 5 años (entretenimiento y educativos
 - **Hilt** para inyección de dependencias
 - Navigation Compose con rutas **type-safe**
 - Paquete `com.antonio.minigames` · minSdk 26 · móvil y tablet
-- Diseño: Stitch (vía MCP), pendiente de configurar (paso 9)
+- Diseño: retro propio, claro y oscuro (`docs/rules/compose-ui.md`)
 
 ## Estructura
 Un solo módulo `:app`, organizado **primero por capa y luego por juego**. Detalle en [`docs/rules/architecture.md`](docs/rules/architecture.md).
@@ -19,7 +19,7 @@ Un solo módulo `:app`, organizado **primero por capa y luego por juego**. Detal
 ```
 com/antonio/minigames/
 ├── ui/
-│   └── theme/            # colores, tipografía
+│   └── theme/            # colores, tipografía, formas
 ├── data/memory/
 ├── domain/
 │   ├── menu/             # MiniGame + MenuUseCase
@@ -38,6 +38,7 @@ com/antonio/minigames/
 | Git, ramas y commits | [`docs/rules/git.md`](docs/rules/git.md) |
 | Hilt e inyección | [`docs/rules/hilt.md`](docs/rules/hilt.md) |
 | MVI (State / Intent / Effect) | [`docs/rules/mvi.md`](docs/rules/mvi.md) |
+| Diseño y Compose UI | [`docs/rules/compose-ui.md`](docs/rules/compose-ui.md) |
 | Tests | [`docs/rules/testing.md`](docs/rules/testing.md) |
 
 Las reglas crecen paso a paso: cuando se toma una decisión nueva, se añade o ajusta aquí en el mismo PR.

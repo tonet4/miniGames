@@ -11,7 +11,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -29,6 +29,7 @@ import com.antonio.minigames.presentation.memory.MemoryIntent.RetryClicked
 import com.antonio.minigames.presentation.memory.components.MemoryError
 import com.antonio.minigames.presentation.memory.components.MemoryGame
 import com.antonio.minigames.presentation.shared.components.CustomTopBar
+import com.antonio.minigames.presentation.shared.components.retroBackground
 import com.antonio.minigames.ui.theme.MinigamesTheme
 
 @Composable
@@ -90,6 +91,7 @@ private fun MemoryContent(
     Box(
         modifier = modifier
             .fillMaxSize()
+            .retroBackground()
             .padding(16.dp),
         contentAlignment = Alignment.Center,
     ) {
@@ -108,7 +110,7 @@ private fun MemoryContent(
     }
 }
 
-@Preview(showBackground = true)
+@PreviewLightDark
 @Composable
 private fun MemoryScreenPreview() {
     MinigamesTheme {
